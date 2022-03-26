@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios-auth";
 import ProductListItem from "./ProductListItem.vue";
 
 export default {
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     loadProducts() {
-      axios.get("http://localhost/products").then((result) => {
+      axios.get("/products").then((result) => {
         this.products = result.data;
       });
     },

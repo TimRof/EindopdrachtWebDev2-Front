@@ -1,24 +1,33 @@
-# routing-intro
+# Eindopdracht Webdevelopment 2
 
-## Project setup
+By: Tim Roffelsen 672395
+
+## Introduction
+
+Dit is mijn eindproject voor Webdevelopment 2, een remake van Webdev 1 in Vue!
+
+Ik heb een online kappers site gemaakt waar je kan: registreren, inloggen en natuurlijk een afspraak maken. Je kan maximaal 3 weken van te voren een afspraak maken, en je kan geen afspraak maken op een datum of tijdstip dat al geweest is.
+
+Als je het admin hebt kun je ook: alle huidige afspraken inzien, updaten, verwijderen en de api van alle huidige afspraken zien (te vinden in de footer).
+
+## Login info
+
+**User account**
+
 ```
-npm install
+Email: Mark.deHaan@inholland.nl
+Password: secret123
 ```
 
-### Compiles and hot-reloads for development
+**Admin account**
+
 ```
-npm run serve
+Email: admin@admin.admin
+Password: secret123
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Database install**
 
-### Lints and fixes files
 ```
-npm run lint
+Url: localhost/install
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
