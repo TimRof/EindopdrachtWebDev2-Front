@@ -65,7 +65,7 @@ export default {
       let newState = {};
 
       Object.keys(state).forEach((key) => {
-        newState[key] = null; // or = initialState[key]
+        newState[key] = null;
       });
 
       this.$store.replaceState(newState);

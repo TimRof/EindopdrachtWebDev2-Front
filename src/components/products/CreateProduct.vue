@@ -70,7 +70,6 @@ export default {
    mounted() {
     axios.get("http://localhost/categories")
     .then(result => {
-      console.log(result);
       this.categories = result.data;
     })
   },

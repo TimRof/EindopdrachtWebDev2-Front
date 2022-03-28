@@ -5,7 +5,9 @@
     v-bind:id="getName()"
     class="btn-check"
     v-bind:value="timeSlot.timeslot"
-    :disabled="timeSlot.taken === true"
+    :disabled="
+      timeSlot.taken === true || new Date(timeSlot.start.date) < new Date()
+    "
     required
     @click="$emit('selected', $event.target.value)"
   />

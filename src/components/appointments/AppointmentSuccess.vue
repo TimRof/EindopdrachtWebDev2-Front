@@ -4,8 +4,11 @@
       <h1 class="title">Success!</h1>
       <p>
         Your appointment was successfully made for
-        <strong>{{ date }}</strong> from <strong>{{ start }}</strong> until
-        <strong>{{ end }}</strong
+        <strong>{{ new Date(start).toLocaleDateString() }}</strong>
+        from
+        <strong>{{ new Date(start).toLocaleTimeString().slice(0, -3) }}</strong>
+        until
+        <strong>{{ new Date(end).toLocaleTimeString().slice(0, -3) }}</strong
         >.
       </p>
       <p>We hope to see you then!</p>
@@ -22,7 +25,6 @@
 export default {
   name: "AppointmentSuccess",
   props: {
-    date: Date,
     start: String,
     end: String,
   },
@@ -39,7 +41,7 @@ export default {
       if (typeof this.start === "undefined") {
         this.$router.replace("/");
       }
-      this.redirectTimeout = setTimeout(() => this.redirect(), 300000);
+      this.redirectTimeout = setTimeout(() => this.redirect(), 3000);
     },
     redirect() {
       this.$router.push("/");

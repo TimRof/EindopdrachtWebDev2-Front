@@ -88,11 +88,11 @@ export default {
   name: "Home",
   created() {
     // console.log("Auth: ", this.$store.getters.isAuthenticated);
-    console.log("Auth: ", this.$store.state.token);
-    console.log("Id: ", this.$store.state.id);
-    console.log("Email: ", this.$store.state.email);
-    console.log("Name: ", this.$store.state.name);
-    console.log("Admin: ", this.$store.state.admin);
+    // console.log("Auth: ", this.$store.state.token);
+    // console.log("Id: ", this.$store.state.id);
+    // console.log("Email: ", this.$store.state.email);
+    // console.log("Name: ", this.$store.state.name);
+    // console.log("Admin: ", this.$store.state.admin);
   },
 };
 </script>

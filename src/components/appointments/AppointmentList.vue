@@ -39,7 +39,7 @@
 
 <script>
 import axios from "../../axios-auth";
-import DatePicker from "./DatePicker.vue";
+import DatePicker from "../DatePicker.vue";
 import AppointmentListItem from "./AppointmentListItem.vue";
 import AppointmentTypeItem from "./AppointmentTypeItem.vue";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -73,6 +73,9 @@ export default {
         .get("/slots/" + this.selectedDate.getTime().toString().slice(0, -3))
         .then((result) => {
           this.timeSlots = result.data;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     getTypes() {
@@ -96,29 +99,18 @@ export default {
             type: this.selectedType,
           })
           .then((result) => {
-            if (result.data === 200) {
-              // start time epoch to proper format
-              let start = new Date(this.timeSlots[this.selectedSlot].start.date)
-                .toLocaleTimeString()
-                .slice(0, -3);
-              // end time epoch to proper format
-              let end = new Date(this.timeSlots[this.selectedSlot].end.date)
-                .toLocaleTimeString()
-                .slice(0, -3);
-              console.log(start);
-              this.$router.push({
-                name: "AppointmentSuccess",
-                params: {
-                  date: this.selectedDate.toDateString(),
-                  start: start,
-                  end: end,
-                },
-              });
-            } else {
-              this.resetButtons();
-            }
+            this.$router.push({
+              name: "AppointmentSuccess",
+              params: {
+                start: result.data.starttime,
+                end: result.data.endtime,
+              },
+            });
           })
           .catch((error) => {
+            alert(
+              "\nOops!\n\nSomething went wrong making your appointment, please try again later."
+            );
             console.log(error);
             this.resetButtons();
           });
