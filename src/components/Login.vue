@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import axios from "../axios-auth";
-
 export default {
   name: "Login",
   data() {
@@ -47,27 +45,19 @@ export default {
   },
   methods: {
     login() {
-      axios
-        .post("/users/login", {
+      this.$store
+        .dispatch("login", {
           email: this.email,
           password: this.password,
         })
-        .then((res) => {
-          this.loginError = "";
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + res.data.token;
-          console.log(res);
-          alert(res.data.token);
-          //this.$router.push("/products");
+        .then(() => {
+          this.$router.replace("/loginsuccess");
         })
         .catch((err) => {
           console.log(err);
           this.loginError =
             "Incorrect Credentials, verify your email address and password and try again.";
         });
-    },
-    logout() {
-      axios.defaults.headers.common["Authorization"] = "";
     },
   },
 };

@@ -72,7 +72,7 @@ a:active {
   color: var(--textgray);
   text-decoration: line-through;
 }
-.error{
+.error {
   color: red;
 }
 .btn-primary {
@@ -191,7 +191,7 @@ a:active {
 .reviewrow {
   text-align: center;
 }
-.navbar-brand {
+.href {
   cursor: pointer;
 }
 /* end source: https://github.com/startbootstrap/startbootstrap-freelancer */
@@ -212,6 +212,11 @@ a:active {
 .btn-check:disabled + .btn,
 .btn-check[disabled] + .btn {
   text-decoration: line-through;
+}
+.btn-primary:disabled {
+  border-color: #96d04959;
+  color: #afafaf;
+  background-color: #96d04959;
 }
 .row h1,
 .row p {

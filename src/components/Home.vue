@@ -9,7 +9,9 @@
         alt="Bunny looking like Elvis getting their haircut"
         loading="lazy"
       />
-      <h1 class="text-uppercase mb-0 basic-color">Welcome</h1>
+      <h1 class="mb-0 basic-color">
+        <span class="text-uppercase">Welcome</span> {{ this.$store.state.name }}
+      </h1>
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon">
@@ -22,12 +24,14 @@
         your hair needs! Book your appointment now!
       </p>
       <a
+        v-if="!this.$store.state.token"
         @click="this.$router.push('/login')"
         class="btn btn-primary btn-lg rounded-pill mt-4"
         role="button"
         >Login to make an appointment!</a
       >
       <a
+        v-if="this.$store.state.token"
         @click="this.$router.push('/appointment')"
         class="btn btn-primary btn-lg rounded-pill mt-4"
         role="button"
@@ -36,7 +40,7 @@
     </div>
     <!-- Reviews -->
     <div class="reviewrow justify-content-center">
-      <div class="col-md-2 review reviewrow">
+      <div class="col-md-4 review reviewrow">
         <figure>
           <img
             src="https://media-exp1.licdn.com/dms/image/C5603AQEf6jl-bm5hRg/profile-displayphoto-shrink_800_800/0/1517683024186?e=1653523200&v=beta&t=sPqvxY2svi9Coxs5JuPu-Lcaix7UFz9k6XssTfDoJaY"
@@ -54,7 +58,7 @@
           ><i class="star fa-solid fa-star"></i>
         </div>
       </div>
-      <div class="col-md-2 review">
+      <div class="col-md-4 review reviewrow">
         <figure>
           <img
             src="https://media-exp1.licdn.com/dms/image/C5603AQG0kr7QQrDy6A/profile-displayphoto-shrink_800_800/0/1517405413641?e=1653523200&v=beta&t=bzdUsyb4WlDsgFB0PCvvSWg12Owze1CKVmgPqmJZam4"
@@ -82,6 +86,14 @@
 <script>
 export default {
   name: "Home",
+  created() {
+    // console.log("Auth: ", this.$store.getters.isAuthenticated);
+    console.log("Auth: ", this.$store.state.token);
+    console.log("Id: ", this.$store.state.id);
+    console.log("Email: ", this.$store.state.email);
+    console.log("Name: ", this.$store.state.name);
+    console.log("Admin: ", this.$store.state.admin);
+  },
 };
 </script>
 
