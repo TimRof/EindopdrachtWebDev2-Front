@@ -1,4 +1,4 @@
-# Eindopdracht Webdevelopment 2
+# Eindopdracht Webdevelopment 2 - FRONT END
 
 By: Tim Roffelsen 672395
 
