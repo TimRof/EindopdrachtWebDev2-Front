@@ -73,17 +73,6 @@ const store = createStore({
         });
       }
     },
-    logout() {
-      console.log("here");
-      let state = this.$store.state;
-      let newState = {};
-
-      Object.keys(state).forEach((key) => {
-        newState[key] = null;
-      });
-
-      this.$store.replaceState(newState);
-    },
   },
 });
 

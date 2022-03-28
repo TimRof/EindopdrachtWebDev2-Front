@@ -49,9 +49,6 @@ export default {
   props: {
     appointment: Object,
   },
-  mounted() {
-    console.log(this.appointment);
-  },
   methods: {
     editAppointment(id) {
       this.$router.push("/dashboard/edit/" + id);

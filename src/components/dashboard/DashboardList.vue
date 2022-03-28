@@ -2,6 +2,11 @@
   <section>
     <div class="container">
       <h2 class="mt-3 mt-lg-5">Dashboard</h2>
+      <h4 class="mt-4">Choose date:</h4>
+      <date-picker
+        v-model="selectedDate"
+        @update:modelValue="loadItems"
+      ></date-picker>
       <h4 class="mt-4">Appointments:</h4>
       <div class="row">
         <div
@@ -21,13 +26,20 @@
 
 <script>
 import axios from "../../axios-auth";
+import DatePicker from "../DatePicker.vue";
 import DashboardListItem from "./DashboardListItem.vue";
 
 export default {
   name: "DashboardList",
-  components: { DashboardListItem },
+  components: {
+    DatePicker,
+    DashboardListItem,
+  },
   data() {
-    return { appointments: [] };
+    return {
+      selectedDate: new Date(),
+      appointments: [],
+    };
   },
   mounted() {
     this.loadItems();
@@ -38,7 +50,11 @@ export default {
     },
     getAppointments() {
       axios
-        .get("/appointments")
+        .get("/appointments", {
+          params: {
+            epoch: this.selectedDate.getTime().toString().slice(0, -3),
+          },
+        })
         .then((result) => {
           this.appointments = result.data;
         })

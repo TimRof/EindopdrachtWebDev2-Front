@@ -42,6 +42,13 @@
               </button>
             </div>
           </form>
+          <div
+            class="mt-3 text-danger"
+            v-for="error in signupErrors"
+            :key="error"
+          >
+            <p>{{ error }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -49,16 +56,19 @@
 </template>
 
 <script>
+import axios from "../axios-auth";
+
 export default {
   name: "Signup",
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      passwordRepeat: "",
+      name: "test",
+      email: "test@test.test",
+      password: "testtest",
+      passwordRepeat: "testtest",
       passwordError: "",
       passwordRepeatError: "",
+      signupErrors: [],
     };
   },
   methods: {
@@ -74,11 +84,43 @@ export default {
         this.passwordRepeatError = "Passwords do not match!";
       }
       if (!this.passwordError && !this.passwordRepeatError) {
-        console.log(this.name);
-        console.log(this.email);
-        console.log(this.password);
-        console.log(this.passwordRepeat);
+        this.register();
       }
+    },
+    register() {
+      axios
+        .post("/users", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          passwordRepeat: this.passwordRepeat,
+        })
+        .then((result) => {
+          if (result.data === "OK") {
+            this.login();
+          } else {
+            this.signupErrors = result.data;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    login() {
+      this.$store
+        .dispatch("login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.replace("/loginsuccess");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(
+            "Something went wrong while registering, please try again later."
+          );
+        });
     },
   },
 };

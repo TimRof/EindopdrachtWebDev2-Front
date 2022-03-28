@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from "../axios-auth";
+
 export default {
   name: "Logout",
   data() {
@@ -21,6 +23,7 @@ export default {
     };
   },
   created() {
+    this.logout();
     this.timeout();
   },
   methods: {
@@ -29,6 +32,18 @@ export default {
     },
     redirect() {
       this.$router.replace("/");
+    },
+    logout() {
+      axios.defaults.headers.common["Authorization"] = "";
+      let state = this.$store.state;
+      let newState = {};
+
+      Object.keys(state).forEach((key) => {
+        newState[key] = null;
+      });
+
+      this.$store.replaceState(newState);
+      localStorage.clear();
     },
   },
   beforeUnmount() {

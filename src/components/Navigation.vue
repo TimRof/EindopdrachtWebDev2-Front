@@ -42,7 +42,7 @@
         <li class="nav-item">
           <a
             v-if="this.$store.state.token"
-            @click="logout()"
+            @click="this.$router.replace('/logout')"
             class="btn btn-primary me-3 rounded-pill"
             role="button"
             >Logout</a
@@ -54,25 +54,9 @@
 </template>
 
 <script>
-import axios from "../axios-auth";
-
 export default {
   name: "Navigation",
-  methods: {
-    logout() {
-      axios.defaults.headers.common["Authorization"] = "";
-      let state = this.$store.state;
-      let newState = {};
-
-      Object.keys(state).forEach((key) => {
-        newState[key] = null;
-      });
-
-      this.$store.replaceState(newState);
-      localStorage.clear();
-      this.$router.replace("/logout");
-    },
-  },
+  methods: {},
 };
 </script>
 
