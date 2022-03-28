@@ -38,8 +38,8 @@ export default {
   name: "Login",
   data() {
     return {
-      email: "admin@admin.admin",
-      password: "secret123",
+      email: "",
+      password: "",
       loginError: "",
     };
   },

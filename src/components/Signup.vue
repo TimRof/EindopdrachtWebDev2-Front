@@ -62,10 +62,10 @@ export default {
   name: "Signup",
   data() {
     return {
-      name: "test",
-      email: "test@test.test",
-      password: "testtest",
-      passwordRepeat: "testtest",
+      name: "",
+      email: "",
+      password: "",
+      passwordRepeat: "",
       passwordError: "",
       passwordRepeatError: "",
       signupErrors: [],

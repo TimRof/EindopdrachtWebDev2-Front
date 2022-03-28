@@ -12,8 +12,8 @@
             Install
           </button>
         </div>
-          <hr />
-          <div v-if="data"><span v-html="data"></span></div>
+        <hr />
+        <div v-if="data"><span v-html="data"></span></div>
       </div>
     </div>
   </section>
@@ -34,7 +34,6 @@ export default {
       axios
         .get("/install")
         .then((res) => {
-          console.log(res);
           this.data = res.data;
         })
         .catch((err) => console.log(err));

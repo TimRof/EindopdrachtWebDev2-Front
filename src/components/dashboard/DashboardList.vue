@@ -9,6 +9,9 @@
       ></date-picker>
       <h4 class="mt-4">Appointments:</h4>
       <div class="row">
+        <div class="text-danger mt-3" v-if="appointments.length === 0">
+          No appointments found!
+        </div>
         <div
           class="col-md-5 mt-3"
           v-for="appointment in appointments"
