@@ -13,6 +13,7 @@ import AppointmentList from "./components/appointments/AppointmentList.vue";
 import AppointmentSuccess from "./components/appointments/AppointmentSuccess.vue";
 import Login from "./components/Login.vue";
 import Logout from "./components/Logout.vue";
+import LoginExpired from "./components/LoginExpired.vue";
 import LoginSuccess from "./components/LoginSuccess.vue";
 import Signup from "./components/Signup.vue";
 import Install from "./components/Install.vue";
@@ -72,6 +73,17 @@ const routes = [
   {
     path: "/logout",
     component: Logout,
+    beforeEnter(to, from, next) {
+      if (localStorage.getItem("token")) {
+        next();
+      } else {
+        next("/unauthorised");
+      }
+    },
+  },
+  {
+    path: "/loginexpired",
+    component: LoginExpired,
     beforeEnter(to, from, next) {
       if (localStorage.getItem("token")) {
         next();

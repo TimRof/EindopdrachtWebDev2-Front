@@ -9,6 +9,7 @@ const store = createStore({
       email: null,
       name: null,
       admin: null,
+      tokenExpiration: null,
     };
   },
   getters: {
@@ -26,6 +27,7 @@ const store = createStore({
       state.email = parameters.email;
       state.name = parameters.name;
       state.admin = parameters.admin;
+      state.tokenExpiration = parameters.tokenExpiration;
     },
   },
   actions: {
@@ -47,6 +49,10 @@ const store = createStore({
             localStorage.setItem("email", result.data.email);
             localStorage.setItem("name", result.data.name);
             localStorage.setItem("admin", result.data.admin);
+            localStorage.setItem(
+              "tokenExpiration",
+              result.data.tokenExpiration
+            );
 
             resolve();
           })
@@ -61,6 +67,23 @@ const store = createStore({
       const email = localStorage.getItem("email");
       const name = localStorage.getItem("name");
       const admin = localStorage.getItem("admin");
+      const tokenExpiration = localStorage.getItem("tokenExpiration");
+
+      if (
+        new Date(localStorage.getItem("tokenExpiration") * 1000) < new Date()
+      ) {
+        axios.defaults.headers.common["Authorization"] = "";
+        let state = this.state;
+        let newState = {};
+
+        Object.keys(state).forEach((key) => {
+          newState[key] = null;
+        });
+
+        this.replaceState(newState);
+        localStorage.clear();
+        return;
+      }
 
       if (token && email) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
@@ -70,6 +93,7 @@ const store = createStore({
           email: email,
           name: name,
           admin: JSON.parse(admin),
+          tokenExpiration: tokenExpiration,
         });
       }
     },
